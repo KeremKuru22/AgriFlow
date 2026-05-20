@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriFlow</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <div>
+        <h1>AgriFlow</h1>
+        <p>Farm Activity and Yield Tracking System</p>
+      </div>
+      <button id="logoutBtn" class="danger hidden">Logout</button>
+    </header>
+
+    <main>
+      <section id="authSection" class="card">
+        <h2>Login</h2>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="loginEmail" placeholder="kerem@test.com" />
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="loginPassword" placeholder="Your password" />
+        </div>
+
+        <button id="loginBtn">Login</button>
+
+        <hr />
+
+        <h2>Register</h2>
+
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="registerFullName" placeholder="Kerem Kuru" />
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="registerEmail" placeholder="newuser@test.com" />
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="registerPassword" placeholder="Minimum 6 characters" />
+        </div>
+
+        <button id="registerBtn">Register</button>
+
+        <p id="authMessage" class="message"></p>
+      </section>
+
+      <section id="dashboardSection" class="hidden">
+        <div class="dashboard-grid">
+          <div class="stat-card">
+            <h3>Total Fields</h3>
+            <p id="totalFields">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Activities</h3>
+            <p id="totalActivities">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Harvest Records</h3>
+            <p id="totalHarvestRecords">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Average Yield</h3>
+            <p id="averageYield">0</p>
+          </div>
+        </div>
+
+        <section class="card">
+          <h2>Add Field</h2>
+          <div class="form-row">
+            <input type="text" id="fieldName" placeholder="Field Name" />
+            <input type="text" id="fieldCity" placeholder="City" />
+            <input type="text" id="fieldDistrict" placeholder="District" />
+            <input type="text" id="fieldCropType" placeholder="Crop Type" />
+            <input type="number" id="fieldArea" placeholder="Field Area (ha)" />
+            <input type="text" id="fieldSoilType" placeholder="Soil Type" />
+            <input type="date" id="fieldPlantingDate" />
+            <input type="text" id="fieldDescription" placeholder="Description" />
+          </div>
+          <button id="addFieldBtn">Add Field</button>
+        </section>
+
+        <section class="card">
+          <h2>Fields</h2>
+
+          <div class="filter-row">
+            <input type="text" id="filterFieldCity" placeholder="Filter by city" />
+            <input type="text" id="filterFieldCropType" placeholder="Filter by crop type" />
+            <button id="filterFieldsBtn">Filter</button>
+            <button id="clearFieldFiltersBtn" class="secondary">Clear</button>
+          </div>
+
+          <div id="fieldsList" class="list"></div>
+        </section>
+
+        <section class="card">
+          <h2>Add Farm Activity</h2>
+          <div class="form-row">
+            <select id="activityFieldId"></select>
+            <select id="activityType">
+              <option value="Fertilization">Fertilization</option>
+              <option value="Pesticide">Pesticide</option>
+              <option value="Irrigation">Irrigation</option>
+              <option value="Planting">Planting</option>
+              <option value="Soil Preparation">Soil Preparation</option>
+              <option value="Harvest">Harvest</option>
+            </select>
+            <input type="date" id="activityDate" />
+            <input type="number" id="activityCost" placeholder="Cost" />
+            <input type="text" id="activityDescription" placeholder="Description" />
+          </div>
+          <button id="addActivityBtn">Add Activity</button>
+        </section>
+
+        <section class="card">
+          <h2>Farm Activities</h2>
+
+          <div class="filter-row">
+            <input type="text" id="filterActivityType" placeholder="Filter by activity type" />
+            <button id="filterActivitiesBtn">Filter</button>
+            <button id="clearActivityFiltersBtn" class="secondary">Clear</button>
+          </div>
+
+          <div id="activitiesList" class="list"></div>
+        </section>
+
+        <section class="card">
+          <h2>Add Harvest Record</h2>
+          <div class="form-row">
+            <select id="harvestFieldId"></select>
+            <input type="text" id="harvestCropType" placeholder="Crop Type" />
+            <input type="number" id="totalHarvestAmount" placeholder="Total Harvest Amount" />
+            <input type="text" id="harvestUnit" placeholder="Unit, e.g. kg" value="kg" />
+            <input type="date" id="harvestDate" />
+            <input type="number" id="seasonYear" placeholder="Season Year" />
+            <input type="text" id="harvestNotes" placeholder="Notes" />
+          </div>
+          <button id="addHarvestBtn">Add Harvest</button>
+        </section>
+
+        <section class="card">
+          <h2>Harvest Records</h2>
+
+          <div class="filter-row">
+            <input type="number" id="filterHarvestSeasonYear" placeholder="Filter by season year" />
+            <input type="text" id="filterHarvestCropType" placeholder="Filter by crop type" />
+            <button id="filterHarvestsBtn">Filter</button>
+            <button id="clearHarvestFiltersBtn" class="secondary">Clear</button>
+          </div>
+
+          <div id="harvestsList" class="list"></div>
+        </section>
+
+        <section class="card">
+          <h2>Yearly Yield Summary</h2>
+          <div id="yieldSummaryList" class="list"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
