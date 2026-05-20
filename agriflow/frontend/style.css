@@ -149,6 +149,11 @@ hr {
   gap: 14px;
 }
 
+.brand-link {
+  color: inherit;
+  text-decoration: none;
+}
+
 .brand-mark {
   display: grid;
   width: 48px;
@@ -260,6 +265,20 @@ hr {
   min-width: 0;
 }
 
+.text-link {
+  display: inline-flex;
+  margin-top: 14px;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.text-link:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
 .form-group {
   margin-top: 16px;
 }
@@ -277,6 +296,61 @@ hr {
 
 .message.error {
   color: var(--danger);
+}
+
+.reset-shell {
+  display: grid;
+  min-height: calc(100vh - 128px);
+  place-items: center;
+}
+
+.reset-panel {
+  width: min(100%, 540px);
+}
+
+.reset-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.reset-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: var(--radius);
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.reset-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
+}
+
+.reset-form {
+  margin-top: 22px;
+}
+
+.reset-form button {
+  margin-top: 16px;
+}
+
+.code-box {
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  background: var(--accent-soft);
+  color: #80530f;
+  font-weight: 900;
 }
 
 .dashboard-view {

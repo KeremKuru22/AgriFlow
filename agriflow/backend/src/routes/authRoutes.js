@@ -1,5 +1,10 @@
 const express = require("express");
-const { register, login } = require("../controllers/authController");
+const {
+  register,
+  login,
+  forgotPassword,
+  resetPassword,
+} = require("../controllers/authController");
 
 const router = express.Router();
 
@@ -70,5 +75,23 @@ router.post("/register", register);
  *         description: Invalid email or password
  */
 router.post("/login", login);
+
+/**
+ * @swagger
+ * /api/auth/forgot-password:
+ *   post:
+ *     summary: Generate a password reset verification code
+ *     tags: [Auth]
+ */
+router.post("/forgot-password", forgotPassword);
+
+/**
+ * @swagger
+ * /api/auth/reset-password:
+ *   post:
+ *     summary: Reset password with a verification code
+ *     tags: [Auth]
+ */
+router.post("/reset-password", resetPassword);
 
 module.exports = router;

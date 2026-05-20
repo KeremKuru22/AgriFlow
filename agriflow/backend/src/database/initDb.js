@@ -13,6 +13,22 @@ const initDb = async () => {
     `);
 
     await pool.query(`
+      CREATE UNIQUE INDEX IF NOT EXISTS users_email_lower_unique_idx
+      ON users (LOWER(email));
+    `);
+
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS password_reset_codes (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        code_hash TEXT NOT NULL,
+        expires_at TIMESTAMP NOT NULL,
+        used_at TIMESTAMP,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+    await pool.query(`
       CREATE TABLE IF NOT EXISTS fields (
         id SERIAL PRIMARY KEY,
         user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
