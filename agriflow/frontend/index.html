@@ -9,54 +9,98 @@
 <body>
   <div class="app-container">
     <header class="header">
-      <div>
-        <h1>AgriFlow</h1>
-        <p>Farm Activity and Yield Tracking System</p>
+      <div class="brand-lockup">
+        <div class="brand-mark" aria-hidden="true">AF</div>
+        <div>
+          <h1>AgriFlow</h1>
+          <p>Farm activity and yield tracking system</p>
+        </div>
       </div>
       <button id="logoutBtn" class="danger hidden">Logout</button>
     </header>
 
     <main>
-      <section id="authSection" class="card">
-        <h2>Login</h2>
+      <section id="authSection" class="auth-shell">
+        <aside class="brand-panel">
+          <img
+            class="brand-photo"
+            src="assets/farm-operations-hero.png"
+            alt="Crop field with farm management technology"
+          />
+          <div class="brand-stats" aria-label="AgriFlow highlights">
+            <div class="brand-stat">
+              <strong>Fields</strong>
+              <span>Locations and crop plans</span>
+            </div>
+            <div class="brand-stat">
+              <strong>Work</strong>
+              <span>Farm activity records</span>
+            </div>
+            <div class="brand-stat">
+              <strong>Yield</strong>
+              <span>Season performance</span>
+            </div>
+          </div>
+        </aside>
 
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="loginEmail" placeholder="kerem@test.com" />
-        </div>
+        <section class="auth-panel">
+          <div class="auth-grid">
+            <form class="auth-form" onsubmit="return false;">
+              <h2>Login</h2>
+              <p>Continue managing your farm records.</p>
 
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" id="loginPassword" placeholder="Your password" />
-        </div>
+              <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" autocomplete="email" />
+              </div>
 
-        <button id="loginBtn">Login</button>
+              <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="Your password" autocomplete="current-password" />
+              </div>
 
-        <hr />
+              <button id="loginBtn" type="submit">Login</button>
+            </form>
 
-        <h2>Register</h2>
+            <form class="auth-form" onsubmit="return false;">
+              <h2>Register</h2>
+              <p>Create a new local account.</p>
 
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" id="registerFullName" placeholder="Kerem Kuru" />
-        </div>
+              <div class="form-group">
+                <label for="registerFullName">Full Name</label>
+                <input type="text" id="registerFullName" autocomplete="name" />
+              </div>
 
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="registerEmail" placeholder="newuser@test.com" />
-        </div>
+              <div class="form-group">
+                <label for="registerEmail">Email</label>
+                <input type="email" id="registerEmail" autocomplete="email" />
+              </div>
 
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" id="registerPassword" placeholder="Minimum 6 characters" />
-        </div>
+              <div class="form-group">
+                <label for="registerPassword">Password</label>
+                <input type="password" id="registerPassword" placeholder="Minimum 6 characters" autocomplete="new-password" />
+              </div>
 
-        <button id="registerBtn">Register</button>
+              <button id="registerBtn" type="submit">Register</button>
+            </form>
+          </div>
 
-        <p id="authMessage" class="message"></p>
+          <p id="authMessage" class="message" role="status" aria-live="polite"></p>
+        </section>
       </section>
 
-      <section id="dashboardSection" class="hidden">
+      <section id="dashboardSection" class="hidden dashboard-view">
+        <section class="dashboard-hero">
+          <div>
+            <h2>Farm dashboard</h2>
+            <p>Review field coverage, daily work, harvest outcomes, and yield quality from the same operational view.</p>
+          </div>
+          <div class="dashboard-meta">
+            <span class="pill">Live API data</span>
+            <span class="pill">PostgreSQL backed</span>
+          </div>
+        </section>
+
         <div class="dashboard-grid">
           <div class="stat-card">
             <h3>Total Fields</h3>
@@ -76,96 +120,133 @@
           </div>
         </div>
 
-        <section class="card">
-          <h2>Add Field</h2>
-          <div class="form-row">
-            <input type="text" id="fieldName" placeholder="Field Name" />
-            <input type="text" id="fieldCity" placeholder="City" />
-            <input type="text" id="fieldDistrict" placeholder="District" />
-            <input type="text" id="fieldCropType" placeholder="Crop Type" />
-            <input type="number" id="fieldArea" placeholder="Field Area (ha)" />
-            <input type="text" id="fieldSoilType" placeholder="Soil Type" />
-            <input type="date" id="fieldPlantingDate" />
-            <input type="text" id="fieldDescription" placeholder="Description" />
-          </div>
-          <button id="addFieldBtn">Add Field</button>
-        </section>
+        <div class="workspace-grid">
+          <section class="panel panel-wide">
+            <div class="panel-header">
+              <div>
+                <h2>Add Field</h2>
+                <p class="section-copy">Create a field record with crop, area, and soil details.</p>
+              </div>
+              <button id="addFieldBtn">Add Field</button>
+            </div>
+            <div class="form-row">
+              <input type="text" id="fieldName" placeholder="Field Name" />
+              <input type="text" id="fieldCity" placeholder="City" />
+              <input type="text" id="fieldDistrict" placeholder="District" />
+              <input type="text" id="fieldCropType" placeholder="Crop Type" />
+              <input type="number" id="fieldArea" placeholder="Field Area (ha)" />
+              <input type="text" id="fieldSoilType" placeholder="Soil Type" />
+              <input type="date" id="fieldPlantingDate" />
+              <input type="text" id="fieldDescription" placeholder="Description" />
+            </div>
+          </section>
 
-        <section class="card">
-          <h2>Fields</h2>
+          <section class="panel panel-wide">
+            <div class="panel-header">
+              <div>
+                <h2>Fields</h2>
+                <p class="section-copy">Scan field locations, crop types, and record actions.</p>
+              </div>
+            </div>
 
-          <div class="filter-row">
-            <input type="text" id="filterFieldCity" placeholder="Filter by city" />
-            <input type="text" id="filterFieldCropType" placeholder="Filter by crop type" />
-            <button id="filterFieldsBtn">Filter</button>
-            <button id="clearFieldFiltersBtn" class="secondary">Clear</button>
-          </div>
+            <div class="filter-row">
+              <input type="text" id="filterFieldCity" placeholder="Filter by city" />
+              <input type="text" id="filterFieldCropType" placeholder="Filter by crop type" />
+              <button id="filterFieldsBtn">Filter</button>
+              <button id="clearFieldFiltersBtn" class="secondary">Clear</button>
+            </div>
 
-          <div id="fieldsList" class="list"></div>
-        </section>
+            <div id="fieldsList" class="list"></div>
+          </section>
 
-        <section class="card">
-          <h2>Add Farm Activity</h2>
-          <div class="form-row">
-            <select id="activityFieldId"></select>
-            <select id="activityType">
-              <option value="Fertilization">Fertilization</option>
-              <option value="Pesticide">Pesticide</option>
-              <option value="Irrigation">Irrigation</option>
-              <option value="Planting">Planting</option>
-              <option value="Soil Preparation">Soil Preparation</option>
-              <option value="Harvest">Harvest</option>
-            </select>
-            <input type="date" id="activityDate" />
-            <input type="number" id="activityCost" placeholder="Cost" />
-            <input type="text" id="activityDescription" placeholder="Description" />
-          </div>
-          <button id="addActivityBtn">Add Activity</button>
-        </section>
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Add Farm Activity</h2>
+                <p class="section-copy">Log daily work and costs against a field.</p>
+              </div>
+              <button id="addActivityBtn">Add Activity</button>
+            </div>
+            <div class="form-row">
+              <select id="activityFieldId"></select>
+              <select id="activityType">
+                <option value="Fertilization">Fertilization</option>
+                <option value="Pesticide">Pesticide</option>
+                <option value="Irrigation">Irrigation</option>
+                <option value="Planting">Planting</option>
+                <option value="Soil Preparation">Soil Preparation</option>
+                <option value="Harvest">Harvest</option>
+              </select>
+              <input type="date" id="activityDate" />
+              <input type="number" id="activityCost" placeholder="Cost" />
+              <input type="text" id="activityDescription" placeholder="Description" />
+            </div>
+          </section>
 
-        <section class="card">
-          <h2>Farm Activities</h2>
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Farm Activities</h2>
+                <p class="section-copy">Filter recent work by activity type.</p>
+              </div>
+            </div>
 
-          <div class="filter-row">
-            <input type="text" id="filterActivityType" placeholder="Filter by activity type" />
-            <button id="filterActivitiesBtn">Filter</button>
-            <button id="clearActivityFiltersBtn" class="secondary">Clear</button>
-          </div>
+            <div class="filter-row">
+              <input type="text" id="filterActivityType" placeholder="Filter by activity type" />
+              <button id="filterActivitiesBtn">Filter</button>
+              <button id="clearActivityFiltersBtn" class="secondary">Clear</button>
+            </div>
 
-          <div id="activitiesList" class="list"></div>
-        </section>
+            <div id="activitiesList" class="list"></div>
+          </section>
 
-        <section class="card">
-          <h2>Add Harvest Record</h2>
-          <div class="form-row">
-            <select id="harvestFieldId"></select>
-            <input type="text" id="harvestCropType" placeholder="Crop Type" />
-            <input type="number" id="totalHarvestAmount" placeholder="Total Harvest Amount" />
-            <input type="text" id="harvestUnit" placeholder="Unit, e.g. kg" value="kg" />
-            <input type="date" id="harvestDate" />
-            <input type="number" id="seasonYear" placeholder="Season Year" />
-            <input type="text" id="harvestNotes" placeholder="Notes" />
-          </div>
-          <button id="addHarvestBtn">Add Harvest</button>
-        </section>
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Add Harvest Record</h2>
+                <p class="section-copy">Capture season yield and notes.</p>
+              </div>
+              <button id="addHarvestBtn">Add Harvest</button>
+            </div>
+            <div class="form-row">
+              <select id="harvestFieldId"></select>
+              <input type="text" id="harvestCropType" placeholder="Crop Type" />
+              <input type="number" id="totalHarvestAmount" placeholder="Total Harvest Amount" />
+              <input type="text" id="harvestUnit" placeholder="Unit, e.g. kg" value="kg" />
+              <input type="date" id="harvestDate" />
+              <input type="number" id="seasonYear" placeholder="Season Year" />
+              <input type="text" id="harvestNotes" placeholder="Notes" />
+            </div>
+          </section>
 
-        <section class="card">
-          <h2>Harvest Records</h2>
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Harvest Records</h2>
+                <p class="section-copy">Review yield status and harvest details.</p>
+              </div>
+            </div>
 
-          <div class="filter-row">
-            <input type="number" id="filterHarvestSeasonYear" placeholder="Filter by season year" />
-            <input type="text" id="filterHarvestCropType" placeholder="Filter by crop type" />
-            <button id="filterHarvestsBtn">Filter</button>
-            <button id="clearHarvestFiltersBtn" class="secondary">Clear</button>
-          </div>
+            <div class="filter-row">
+              <input type="number" id="filterHarvestSeasonYear" placeholder="Filter by season year" />
+              <input type="text" id="filterHarvestCropType" placeholder="Filter by crop type" />
+              <button id="filterHarvestsBtn">Filter</button>
+              <button id="clearHarvestFiltersBtn" class="secondary">Clear</button>
+            </div>
 
-          <div id="harvestsList" class="list"></div>
-        </section>
+            <div id="harvestsList" class="list"></div>
+          </section>
 
-        <section class="card">
-          <h2>Yearly Yield Summary</h2>
-          <div id="yieldSummaryList" class="list"></div>
-        </section>
+          <section class="panel panel-wide">
+            <div class="panel-header">
+              <div>
+                <h2>Yearly Yield Summary</h2>
+                <p class="section-copy">Compare yearly harvest performance by crop.</p>
+              </div>
+            </div>
+            <div id="yieldSummaryList" class="list"></div>
+          </section>
+        </div>
       </section>
     </main>
   </div>

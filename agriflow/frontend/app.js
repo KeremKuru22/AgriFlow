@@ -28,6 +28,33 @@ function showMessage(message, type = "success") {
   authMessage.className = `message ${type}`;
 }
 
+function escapeHTML(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function displayValue(value, suffix = "") {
+  if (value === null || value === undefined || value === "") return "-";
+  return `${escapeHTML(value)}${suffix}`;
+}
+
+function emptyState(message) {
+  return `<p class="empty-state">${escapeHTML(message)}</p>`;
+}
+
+function detail(label, value, suffix = "") {
+  return `
+    <div class="detail">
+      <strong>${escapeHTML(label)}</strong>
+      <span>${displayValue(value, suffix)}</span>
+    </div>
+  `;
+}
+
 function showDashboard() {
   authSection.classList.add("hidden");
   dashboardSection.classList.remove("hidden");
@@ -143,7 +170,7 @@ async function loadYieldSummary() {
   const container = document.getElementById("yieldSummaryList");
 
   if (summary.length === 0) {
-    container.innerHTML = "<p>No yearly yield summary found.</p>";
+    container.innerHTML = emptyState("No yearly yield summary found.");
     return;
   }
 
@@ -151,12 +178,19 @@ async function loadYieldSummary() {
     .map(
       (item) => `
       <div class="list-item">
-        <h3>${item.crop_type} - ${item.season_year}</h3>
-        <p><strong>Harvest Count:</strong> ${item.harvest_count}</p>
-        <p><strong>Total Harvest:</strong> ${Number(item.total_harvest).toFixed(2)} kg</p>
-        <p><strong>Average Yield:</strong> ${Number(item.average_yield).toFixed(2)} kg/ha</p>
-        <p><strong>Lowest Yield:</strong> ${Number(item.lowest_yield).toFixed(2)} kg/ha</p>
-        <p><strong>Highest Yield:</strong> ${Number(item.highest_yield).toFixed(2)} kg/ha</p>
+        <div class="list-item-header">
+          <div>
+            <span class="eyebrow">Season ${escapeHTML(item.season_year)}</span>
+            <h3>${escapeHTML(item.crop_type)}</h3>
+          </div>
+          <span class="badge badge-neutral">${escapeHTML(item.harvest_count)} records</span>
+        </div>
+        <div class="detail-grid">
+          ${detail("Total Harvest", Number(item.total_harvest).toFixed(2), " kg")}
+          ${detail("Average Yield", Number(item.average_yield).toFixed(2), " kg/ha")}
+          ${detail("Lowest Yield", Number(item.lowest_yield).toFixed(2), " kg/ha")}
+          ${detail("Highest Yield", Number(item.highest_yield).toFixed(2), " kg/ha")}
+        </div>
       </div>
     `
     )
@@ -182,7 +216,7 @@ async function loadFields() {
   const harvestSelect = document.getElementById("harvestFieldId");
 
   if (fields.length === 0) {
-    container.innerHTML = "<p>No fields found.</p>";
+    container.innerHTML = emptyState("No fields found.");
     activitySelect.innerHTML = "<option value=''>No field available</option>";
     harvestSelect.innerHTML = "<option value=''>No field available</option>";
     return;
@@ -192,14 +226,20 @@ async function loadFields() {
     .map(
       (field) => `
       <div class="list-item">
-        <h3>${field.field_name}</h3>
-        <p><strong>ID:</strong> ${field.id}</p>
-        <p><strong>City:</strong> ${field.city}</p>
-        <p><strong>District:</strong> ${field.district || "-"}</p>
-        <p><strong>Crop:</strong> ${field.crop_type}</p>
-        <p><strong>Area:</strong> ${field.field_area} ha</p>
-        <p><strong>Soil:</strong> ${field.soil_type || "-"}</p>
-        <p><strong>Description:</strong> ${field.description || "-"}</p>
+        <div class="list-item-header">
+          <div>
+            <span class="eyebrow">Field #${escapeHTML(field.id)}</span>
+            <h3>${escapeHTML(field.field_name)}</h3>
+          </div>
+          <span class="badge badge-neutral">${escapeHTML(field.crop_type)}</span>
+        </div>
+        <div class="detail-grid">
+          ${detail("City", field.city)}
+          ${detail("District", field.district)}
+          ${detail("Area", field.field_area, " ha")}
+          ${detail("Soil", field.soil_type)}
+          ${detail("Description", field.description)}
+        </div>
         <div class="list-actions">
           <button onclick="editField(${field.id})">Edit</button>
           <button class="danger" onclick="deleteField(${field.id})">Delete</button>
@@ -210,7 +250,7 @@ async function loadFields() {
     .join("");
 
   const options = fields
-    .map((field) => `<option value="${field.id}">${field.field_name}</option>`)
+    .map((field) => `<option value="${field.id}">${escapeHTML(field.field_name)}</option>`)
     .join("");
 
   activitySelect.innerHTML = options;
@@ -352,7 +392,7 @@ async function loadActivities() {
   const container = document.getElementById("activitiesList");
 
   if (activities.length === 0) {
-    container.innerHTML = "<p>No farm activities found.</p>";
+    container.innerHTML = emptyState("No farm activities found.");
     return;
   }
 
@@ -360,13 +400,19 @@ async function loadActivities() {
     .map(
       (activity) => `
       <div class="list-item">
-        <h3>${activity.activity_type}</h3>
-        <p><strong>ID:</strong> ${activity.id}</p>
-        <p><strong>Field:</strong> ${activity.field_name}</p>
-        <p><strong>Field ID:</strong> ${activity.field_id}</p>
-        <p><strong>Date:</strong> ${formatDate(activity.activity_date)}</p>
-        <p><strong>Cost:</strong> ${activity.cost}</p>
-        <p><strong>Description:</strong> ${activity.description || "-"}</p>
+        <div class="list-item-header">
+          <div>
+            <span class="eyebrow">Activity #${escapeHTML(activity.id)}</span>
+            <h3>${escapeHTML(activity.activity_type)}</h3>
+          </div>
+          <span class="badge badge-neutral">${escapeHTML(formatDate(activity.activity_date))}</span>
+        </div>
+        <div class="detail-grid">
+          ${detail("Field", activity.field_name)}
+          ${detail("Field ID", activity.field_id)}
+          ${detail("Cost", activity.cost)}
+          ${detail("Description", activity.description)}
+        </div>
         <div class="list-actions">
           <button onclick="editActivity(${activity.id})">Edit</button>
           <button class="danger" onclick="deleteActivity(${activity.id})">Delete</button>
@@ -491,7 +537,7 @@ async function loadHarvests() {
   const container = document.getElementById("harvestsList");
 
   if (harvests.length === 0) {
-    container.innerHTML = "<p>No harvest records found.</p>";
+    container.innerHTML = emptyState("No harvest records found.");
     return;
   }
 
@@ -506,15 +552,21 @@ async function loadHarvests() {
 
       return `
         <div class="list-item">
-          <h3>${harvest.crop_type} - ${harvest.season_year}</h3>
-          <p><strong>ID:</strong> ${harvest.id}</p>
-          <p><strong>Field:</strong> ${harvest.field_name}</p>
-          <p><strong>Field ID:</strong> ${harvest.field_id}</p>
-          <p><strong>Total Harvest:</strong> ${harvest.total_harvest_amount} ${harvest.unit}</p>
-          <p><strong>Yield:</strong> ${harvest.yield_per_hectare} kg/ha</p>
-          <p><strong>Date:</strong> ${formatDate(harvest.harvest_date)}</p>
-          <p><strong>Notes:</strong> ${harvest.notes || "-"}</p>
-          <span class="badge ${badgeClass}">${harvest.yield_status}</span>
+          <div class="list-item-header">
+            <div>
+              <span class="eyebrow">Harvest #${escapeHTML(harvest.id)} - ${escapeHTML(harvest.season_year)}</span>
+              <h3>${escapeHTML(harvest.crop_type)}</h3>
+            </div>
+            <span class="badge ${badgeClass}">${escapeHTML(harvest.yield_status)}</span>
+          </div>
+          <div class="detail-grid">
+            ${detail("Field", harvest.field_name)}
+            ${detail("Field ID", harvest.field_id)}
+            ${detail("Total Harvest", `${harvest.total_harvest_amount} ${harvest.unit}`)}
+            ${detail("Yield", harvest.yield_per_hectare, " kg/ha")}
+            ${detail("Date", formatDate(harvest.harvest_date))}
+            ${detail("Notes", harvest.notes)}
+          </div>
           <div class="list-actions">
             <button onclick="editHarvest(${harvest.id})">Edit</button>
             <button class="danger" onclick="deleteHarvest(${harvest.id})">Delete</button>
