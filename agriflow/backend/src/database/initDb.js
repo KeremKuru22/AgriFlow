@@ -60,6 +60,7 @@ const initDb = async () => {
     console.log("Database tables created successfully.");
   } catch (error) {
     console.error("Database initialization error:", error.message);
+    throw error;
   }
 };
 

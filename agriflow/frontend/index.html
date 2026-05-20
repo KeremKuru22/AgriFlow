@@ -91,31 +91,103 @@
 
       <section id="dashboardSection" class="hidden dashboard-view">
         <section class="dashboard-hero">
-          <div>
-            <h2>Farm dashboard</h2>
-            <p>Review field coverage, daily work, harvest outcomes, and yield quality from the same operational view.</p>
+          <div class="dashboard-title">
+            <span class="dashboard-title-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="img">
+                <path d="M3 20h18" />
+                <path d="M5 20V9l7-5 7 5v11" />
+                <path d="M9 20v-6h6v6" />
+                <path d="M9 10h6" />
+              </svg>
+            </span>
+            <div>
+              <h2>Farm dashboard</h2>
+              <p>Review field coverage, daily work, harvest outcomes, and yield quality from the same operational view.</p>
+            </div>
           </div>
-          <div class="dashboard-meta">
-            <span class="pill">Live API data</span>
-            <span class="pill">PostgreSQL backed</span>
+          <div class="dashboard-icon-strip" aria-hidden="true">
+            <span>
+              <svg viewBox="0 0 24 24" role="img">
+                <path d="M4 19c5-8 11-8 16 0" />
+                <path d="M4 14c5-5 11-5 16 0" />
+                <path d="M4 9c5-3 11-3 16 0" />
+              </svg>
+            </span>
+            <span>
+              <svg viewBox="0 0 24 24" role="img">
+                <path d="M12 21V8" />
+                <path d="M12 8c-4 0-7-2-7-5 4 0 7 2 7 5Z" />
+                <path d="M12 12c4 0 7-2 7-5-4 0-7 2-7 5Z" />
+              </svg>
+            </span>
+            <span>
+              <svg viewBox="0 0 24 24" role="img">
+                <path d="M4 17h16" />
+                <path d="M7 17V7" />
+                <path d="M12 17V4" />
+                <path d="M17 17v-6" />
+                <path d="M5 21h14" />
+              </svg>
+            </span>
           </div>
         </section>
 
         <div class="dashboard-grid">
           <div class="stat-card">
-            <h3>Total Fields</h3>
+            <div class="stat-heading">
+              <span class="stat-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <path d="M3 18c5-5 13-5 18 0" />
+                  <path d="M3 13c5-4 13-4 18 0" />
+                  <path d="M3 8c5-3 13-3 18 0" />
+                </svg>
+              </span>
+              <h3>Total Fields</h3>
+            </div>
             <p id="totalFields">0</p>
           </div>
           <div class="stat-card">
-            <h3>Total Activities</h3>
+            <div class="stat-heading">
+              <span class="stat-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <path d="M8 6h13" />
+                  <path d="M8 12h13" />
+                  <path d="M8 18h13" />
+                  <path d="M3 6h.01" />
+                  <path d="M3 12h.01" />
+                  <path d="M3 18h.01" />
+                </svg>
+              </span>
+              <h3>Total Activities</h3>
+            </div>
             <p id="totalActivities">0</p>
           </div>
           <div class="stat-card">
-            <h3>Total Harvest Records</h3>
+            <div class="stat-heading">
+              <span class="stat-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <path d="M12 21V8" />
+                  <path d="M12 8c-4 0-7-2-7-5 4 0 7 2 7 5Z" />
+                  <path d="M12 12c4 0 7-2 7-5-4 0-7 2-7 5Z" />
+                  <path d="M5 21h14" />
+                </svg>
+              </span>
+              <h3>Total Harvest Records</h3>
+            </div>
             <p id="totalHarvestRecords">0</p>
           </div>
           <div class="stat-card">
-            <h3>Average Yield</h3>
+            <div class="stat-heading">
+              <span class="stat-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <path d="M4 17h16" />
+                  <path d="M7 17V7" />
+                  <path d="M12 17V4" />
+                  <path d="M17 17v-6" />
+                </svg>
+              </span>
+              <h3>Average Yield</h3>
+            </div>
             <p id="averageYield">0</p>
           </div>
         </div>
